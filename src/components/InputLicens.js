@@ -30,25 +30,25 @@ const InputLicens = (props) => {
                 <InputGroup.Text id="basic-addon3">
                     Стоимость дополнительного ПО
                 </InputGroup.Text>
-                <Form.Control value={props.priceAddSoft} onChange={e => props.setPriceAddSoft(e.target.value)}/>
+                <Form.Control disabled value={props.priceAddSoft} onChange={e => props.setPriceAddSoft(e.target.value)}/>
             </InputGroup>
             <InputGroup className="mb-1">
                 <InputGroup.Text id="basic-addon3">
                     Стоимость разработки и тестирования алгоритма для Робота, руб
                 </InputGroup.Text>
-                <Form.Control value={props.priceDevelop} onChange={e => props.setPriceDevelop(e.target.value)}/>
+                <Form.Control disabled value={props.priceDevelop} onChange={e => props.setPriceDevelop(e.target.value)}/>
             </InputGroup>
             <InputGroup className="mb-1">
                 <InputGroup.Text id="basic-addon3">
                     Коэффициент быстродействия робота относительно человека x
                 </InputGroup.Text>
-                <Form.Control value={props.perform} onChange={e => props.setPerform(e.target.value)}/>
+                <Form.Control disabled value={props.perform} onChange={e => props.setPerform(e.target.value)}/>
             </InputGroup>
             <InputGroup className="mb-1">
                 <InputGroup.Text id="basic-addon3">
                     Стоимость поддержки в год, в год
                 </InputGroup.Text>
-                <Form.Control value={props.price} onChange={e => props.setPrice(e.target.value)}/>
+                <Form.Control disabled value={props.price} onChange={e => props.setPrice(e.target.value)}/>
             </InputGroup>
         </Col>
     );

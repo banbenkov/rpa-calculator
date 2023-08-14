@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Row from "react-bootstrap/Row";
 import InputPerson from "./InputPerson";
 import InputLicens from "./InputLicens";
 import Button from "react-bootstrap/Button";
 import TableInfo from "./TableInfo";
+import Form from 'react-bootstrap/Form';
+import CutTableInfo from "./CutTableInfo";
 
 
 const InputBlock = () => {
@@ -19,9 +21,9 @@ const InputBlock = () => {
     const [licens, setLicens] = useState(0);
     const [licensQuan, setLicensQuan] = useState(0);
     const [priceAddSoft, setPriceAddSoft] = useState(0);
-    const [priceDevelop, setPriceDevelop] = useState(0);
-    const [perform, setPerform] = useState(0);
-    const [price, setPrice] = useState(0);
+    const [priceDevelop, setPriceDevelop] = useState(200000);
+    const [perform, setPerform] = useState(2);
+    const [price, setPrice] = useState(100000);
 
     //Данные для таблицы
     const [timeEmpl, setTimeEmpl] = useState(0);
@@ -38,7 +40,17 @@ const InputBlock = () => {
     const [timePayback, setTimePayback] = useState(0);
 
     const [showTable, setShowTable] = useState(false);
+    const [switchType, setSwitchType] = useState(false);
     const licensArr = ['Лицензия на 12 мес', 'Лицензия бессрочная'];
+    const switchText = ['Полная версия таблицы', 'Обрезанная версия таблицы'];
+
+    useEffect(() => {
+        if (licensType === 0) {
+            setLicens(300000);
+        } else {
+            setLicens(0);
+        }
+    }, [licensType]);
 
     const calculate = () => {
         const timeEmplC = parseInt(numMin) * 247 / 60 * parseInt(numRep);
@@ -59,7 +71,7 @@ const InputBlock = () => {
         setPriceProcRobotSecond(priceProcRobotSecondC);
         setRoiFirst(((priceProcEmplC - priceProcRobotC) / priceProcRobotC * 100).toFixed(2));
         setRoiSecond(((priceProcEmplC - priceProcRobotSecondC) / priceProcRobotSecondC * 100).toFixed(2));
-        setTimePayback((priceProcRobotC / (priceProcEmplC / 12 )).toFixed(1));
+        setTimePayback((priceProcRobotC / (priceProcEmplC / 12)).toFixed(1));
         setShowTable(true);
 
     }
@@ -79,16 +91,29 @@ const InputBlock = () => {
                          price={price} setPrice={setPrice}
                          licensArr={licensArr}
             />
+            <Form>
+                <Form.Check // prettier-ignore
+                    type="switch"
+                    id="custom-switch"
+                    label={switchType ? switchText[0] : switchText[1]}
+                    onClick={() => setSwitchType(!switchType)}
+                />
+            </Form>
             <Button variant="secondary" size="lg" className='mb-3' onClick={() => calculate()}>
                 Рассчитать
             </Button>
-            <TableInfo showTable={showTable} timeEmpl={timeEmpl}
-                       timeRobot={timeRobot} expenFirstYear={expenFirstYear}
-                       expenSecondYear={expenSecondYear} fteStaff={fteStaff}
-                       fteRobot={fteRobot} priceProcEmpl={priceProcEmpl}
-                       priceProcRobot={priceProcRobot} priceProcRobotSecond={priceProcRobotSecond}
-                       roiFirst={roiFirst} roiSecond={roiSecond}
-                       timePayback={timePayback}/>
+            {switchType ?
+                <TableInfo showTable={showTable} timeEmpl={timeEmpl}
+                           timeRobot={timeRobot} expenFirstYear={expenFirstYear}
+                           expenSecondYear={expenSecondYear} fteStaff={fteStaff}
+                           fteRobot={fteRobot} priceProcEmpl={priceProcEmpl}
+                           priceProcRobot={priceProcRobot} priceProcRobotSecond={priceProcRobotSecond}
+                           roiFirst={roiFirst} roiSecond={roiSecond}
+                           timePayback={timePayback}/>
+                :
+                <CutTableInfo showTable={showTable} timeEmpl={timeEmpl}
+                              timeRobot={timeRobot} priceProcEmpl={priceProcEmpl}
+                              priceProcRobot={priceProcRobot}/>}
 
         </Row>
     );
