@@ -104,7 +104,7 @@ const TableInfo = (props) => {
                                 aria-describedby="basic-addon2"
                             />
                         </FloatingLabel>
-                        <Button variant="outline-secondary" id="button-addon2">
+                        <Button variant="outline-secondary" id="button-addon2" onClick={() => props.sendData()}>
                             Отправить
                         </Button>
                     </InputGroup>
