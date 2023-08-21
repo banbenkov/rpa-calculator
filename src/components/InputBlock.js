@@ -42,6 +42,7 @@ const InputBlock = () => {
 
     const [showTable, setShowTable] = useState(false);
     const [switchType, setSwitchType] = useState(false);
+    const [mail, setMail] = useState('');
     const licensArr = ['Лицензия на 12 мес', 'Лицензия бессрочная'];
     const switchText = ['Полная версия таблицы', 'Обрезанная версия таблицы'];
 
@@ -76,13 +77,18 @@ const InputBlock = () => {
         setShowTable(true);
     }
     const sendData = async () => {
-        const data = `${numEmp};${numRep};${numMin};${salaryAmount};${empAmount};${licens};${licens};${licensQuan};${priceAddSoft};${priceDevelop};${perform};${price}`;
+        const data = `${numEmp};${numRep};${numMin};${salaryAmount};${empAmount};${licens};${licens};${licensQuan};${priceAddSoft};${priceDevelop};${perform};${price};${mail}`;
         console.log(data);
-        const response = await axios.post('https://rpa-mmap.saprun.com:44300/api/Token?username=admin&password=Admin1Default%40');
-        console.log(response.data);
-        await axios.post(`https://rpa-mmap.saprun.com:44300/api/Data/SetValueById?dataId=11&value=${data}`, {}, {headers: {
-            'Authorization': `Bearer ${response.data.access_token}`
-            }})
+        try {
+            const response = await axios.post('https://rpa-mmap.saprun.com:44300/api/Token?username=admin&password=Admin1Default%40');
+            console.log(response.data.access_token);
+            await axios.post(`https://rpa-mmap.saprun.com:44300/api/Data/SetValueById?dataId=11&value=${data}`, {}, {headers: {
+                    'Authorization': `Bearer ${response.data.access_token}`,
+                }})
+        } catch (e) {
+            console.log(e);
+        }
+
     }
     return (
         <Row>
@@ -119,12 +125,14 @@ const InputBlock = () => {
                            priceProcRobot={priceProcRobot} priceProcRobotSecond={priceProcRobotSecond}
                            roiFirst={roiFirst} roiSecond={roiSecond}
                            timePayback={timePayback}
-                           sendData={sendData}/>
+                           sendData={sendData}
+                            mail={mail} setMail={setMail}/>
                 :
                 <CutTableInfo showTable={showTable} timeEmpl={timeEmpl}
                               timeRobot={timeRobot} priceProcEmpl={priceProcEmpl}
                               priceProcRobot={priceProcRobot}
-                              sendData={sendData}/>}
+                              sendData={sendData}
+                              mail={mail} setMail={setMail}/>}
 
         </Row>
     );

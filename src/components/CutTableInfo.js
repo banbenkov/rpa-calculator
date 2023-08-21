@@ -62,6 +62,8 @@ const CutTableInfo = (props) => {
                                 placeholder="Recipient's username"
                                 aria-label="Recipient's username"
                                 aria-describedby="basic-addon2"
+                                value={props.mail}
+                                onChange={e => props.setMail(e.target.value)}
                             />
                         </FloatingLabel>
                         <Button variant="outline-secondary" id="button-addon2" onClick={() => props.sendData()}>
