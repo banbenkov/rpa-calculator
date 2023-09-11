@@ -41,7 +41,7 @@ const InputBlock = () => {
     const [timePayback, setTimePayback] = useState(0);
 
     const [showTable, setShowTable] = useState(false);
-    const [switchType, setSwitchType] = useState(false);
+    const [switchType, setSwitchType] = useState(true);
     const [mail, setMail] = useState('');
     const licensArr = ['Лицензия на 12 мес', 'Лицензия бессрочная'];
     const switchText = ['Полная версия таблицы', 'Обрезанная версия таблицы'];
@@ -106,14 +106,14 @@ const InputBlock = () => {
                          price={price} setPrice={setPrice}
                          licensArr={licensArr}
             />
-            <Form>
-                <Form.Check // prettier-ignore
-                    type="switch"
-                    id="custom-switch"
-                    label={switchType ? switchText[0] : switchText[1]}
-                    onClick={() => setSwitchType(!switchType)}
-                />
-            </Form>
+            {/*<Form>*/}
+            {/*    <Form.Check // prettier-ignore*/}
+            {/*        type="switch"*/}
+            {/*        id="custom-switch"*/}
+            {/*        label={switchType ? switchText[0] : switchText[1]}*/}
+            {/*        onClick={() => setSwitchType(!switchType)}*/}
+            {/*    />*/}
+            {/*</Form>*/}
             <Button variant="secondary" size="lg" className='mb-3' onClick={() => calculate()}>
                 Рассчитать
             </Button>

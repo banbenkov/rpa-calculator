@@ -87,31 +87,31 @@ const TableInfo = (props) => {
                 </tr>
                 </tbody>
             </Table>
-            <Col sm={4}>
-                <OverlayTrigger
-                    placement="right"
-                    delay={{show: 250, hide: 400}}
-                    overlay={renderTooltip}
-                >
-                    <InputGroup className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Email"
-                        >
-                            <Form.Control
-                                placeholder="Recipient's username"
-                                aria-label="Recipient's username"
-                                aria-describedby="basic-addon2"
-                                value={props.mail}
-                                onChange={e => props.setMail(e.target.value)}
-                            />
-                        </FloatingLabel>
-                        <Button variant="outline-secondary" id="button-addon2" onClick={() => props.sendData()}>
-                            Отправить
-                        </Button>
-                    </InputGroup>
-                </OverlayTrigger>
-            </Col>
+            {/*<Col sm={4}>*/}
+            {/*    <OverlayTrigger*/}
+            {/*        placement="right"*/}
+            {/*        delay={{show: 250, hide: 400}}*/}
+            {/*        overlay={renderTooltip}*/}
+            {/*    >*/}
+            {/*        <InputGroup className="mb-3">*/}
+            {/*            <FloatingLabel*/}
+            {/*                controlId="floatingInput"*/}
+            {/*                label="Email"*/}
+            {/*            >*/}
+            {/*                <Form.Control*/}
+            {/*                    placeholder="Recipient's username"*/}
+            {/*                    aria-label="Recipient's username"*/}
+            {/*                    aria-describedby="basic-addon2"*/}
+            {/*                    value={props.mail}*/}
+            {/*                    onChange={e => props.setMail(e.target.value)}*/}
+            {/*                />*/}
+            {/*            </FloatingLabel>*/}
+            {/*            <Button variant="outline-secondary" id="button-addon2" onClick={() => props.sendData()}>*/}
+            {/*                Отправить*/}
+            {/*            </Button>*/}
+            {/*        </InputGroup>*/}
+            {/*    </OverlayTrigger>*/}
+            {/*</Col>*/}
         </div>
     );
 };
